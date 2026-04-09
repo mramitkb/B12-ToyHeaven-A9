@@ -1,0 +1,98 @@
+[
+  {
+    "toyId": 1,
+    "toyName": "Lego Classic Bricks",
+    "sellerName": "Toys R Us Local",
+    "sellerEmail": "contact@toysruslocal.com",
+    "price": 49.99,
+    "rating": 4.7,
+    "availableQuantity": 75,
+    "description": "A timeless set of colorful Lego bricks that encourages creativity and imagination. Kids can build anything they dream of.",
+    "pictureURL": "https://i.ibb.co.com/MkM7kRQN/Lego-Classic-Bricks.jpg",
+    "subCategory": "Building Blocks"
+  },
+  {
+    "toyId": 2,
+    "toyName": "Wooden Castle Blocks",
+    "sellerName": "CastleCraft",
+    "sellerEmail": "support@castlecraft.com",
+    "price": 39.99,
+    "rating": 4.5,
+    "availableQuantity": 60,
+    "description": "A medieval wooden castle block set that helps children enhance fine motor skills while role-playing kings and queens.",
+    "pictureURL": "https://i.ibb.co.com/Rt6QLNd/Wooden-Castle-Blocks.jpg",
+    "subCategory": "Building Blocks"
+  },
+  {
+    "toyId": 3,
+    "toyName": "Magic Princess Doll",
+    "sellerName": "Dollify",
+    "sellerEmail": "info@dollify.co",
+    "price": 24.99,
+    "rating": 4.3,
+    "availableQuantity": 120,
+    "description": "A sparkling princess doll with a detachable crown and magical storyline booklet for imaginative play.",
+    "pictureURL": "https://i.ibb.co.com/fVP0kpRn/Magic-Princess-Doll.jpg",
+    "subCategory": "Dolls"
+  },
+  {
+    "toyId": 4,
+    "toyName": "Knight Action Figure",
+    "sellerName": "HeroWorld",
+    "sellerEmail": "support@heroworld.com",
+    "price": 19.99,
+    "rating": 4.6,
+    "availableQuantity": 82,
+    "description": "A heroic knight action figure with a silver sword and shield. Perfect for fantasy-themed adventures.",
+    "pictureURL": "https://i.ibb.co.com/yTnrgG6/Knight-Action-Figure.jpg",
+    "subCategory": "Action Figures"
+  },
+  {
+    "toyId": 5,
+    "toyName": "Mini RC Racing Car",
+    "sellerName": "SpeedyToys",
+    "sellerEmail": "hello@speedytoys.com",
+    "price": 29.99,
+    "rating": 4.2,
+    "availableQuantity": 55,
+    "description": "A fast mini remote-control racing car with rechargeable battery and LED headlights.",
+    "pictureURL": "https://i.ibb.co.com/0R5JKhpD/Mini-RC-Racing-Car.jpg",
+    "subCategory": "Vehicles"
+  },
+  {
+    "toyId": 6,
+    "toyName": "Firetruck Rescue Engine",
+    "sellerName": "KidzFun",
+    "sellerEmail": "sales@kidzfun.com",
+    "price": 34.99,
+    "rating": 4.8,
+    "availableQuantity": 47,
+    "description": "A classic red rescue firetruck toy with movable ladder and siren sounds.",
+    "pictureURL": "https://i.ibb.co.com/0ycvhsQZ/Firetruck-Rescue-Engine.jpg",
+    "subCategory": "Vehicles"
+  },
+  {
+    "toyId": 7,
+    "toyName": "Soft Teddy Bear",
+    "sellerName": "Hug n' Play",
+    "sellerEmail": "care@hugplay.com",
+    "price": 14.99,
+    "rating": 4.9,
+    "availableQuantity": 200,
+    "description": "A super-soft brown teddy bear that brings comfort and joy to kids of all ages.",
+    "pictureURL": "https://i.ibb.co.com/s9GyXsfv/Soft-Teddy-Bear.jpg",
+    "subCategory": "Soft Toys"
+  },
+  {
+    "toyId": 8,
+    "toyName": "Talking Robot Buddy",
+    "sellerName": "TechKid",
+    "sellerEmail": "robot@techkid.com",
+    "price": 59.99,
+    "rating": 4.4,
+    "availableQuantity": 40,
+    "description": "A smart talking robot that sings, dances, and responds to voice commands.",
+    "pictureURL": "https://i.ibb.co.com/YF9cMCmZ/Talking-Robot-Buddy.jpg",
+    "subCategory": "Electronic Toys"
+  }
+]
