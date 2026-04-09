@@ -9,7 +9,7 @@ const ToyDetails = () => {
   const toy = toysData.find((t) => t.toyId === Number(id));
   const { toyId, toyName, price, rating, availableQuantity, pictureURL } = toy;
   return (
-    <div className="text-black">
+    <div>
       <Helmet>
         <title>{toyName}</title>
       </Helmet>
