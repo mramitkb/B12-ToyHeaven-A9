@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import MyLink from "./MyLink";
+import { Link } from "react-router";
+import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 const Navbar = () => {
+  const { user, loading } = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="shadow-sm bg-[#d1ffe3]">
       <div className="navbar w-10/12 mx-auto px-0">
@@ -29,10 +33,10 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 gap-3 w-32 p-3 shadow z-5"
             >
               <MyLink to={"/"}>Home</MyLink>
-          <MyLink to={"/my-profile"}>My Profile</MyLink>
+              <MyLink to={"/my-profile"}>My Profile</MyLink>
             </ul>
           </div>
-          <h1 className="text-2xl font-bold">
+          <Link to="/" className="text-2xl font-bold">
             <span className="text-[#FB4231]">T</span>
             <span className="text-[#dfce15]">o</span>
             <span className="text-[#5FC209]">y</span>
@@ -42,14 +46,29 @@ const Navbar = () => {
             <span className="text-[#5FC209]">v</span>
             <span className="text-[#14a6ce]">e</span>
             <span className="text-[#AA43FA]">n</span>
-          </h1>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex gap-5">
           <MyLink to={"/"}>Home</MyLink>
           <MyLink to={"/my-profile"}>My Profile</MyLink>
         </div>
-        <div className="navbar-end">
-          <a className="btn btn-neutral border-none shadow-none hover:text-primary">Login</a>
+        <div className="navbar-end gap-2">
+          {user ? <img className=" w-10 h-10" src={user.photoURL} alt="" /> : <div className="skeleton w-10 h-10 shrink-0 rounded-full"></div>}
+          {
+            user ? <Link
+            to=""
+            className="btn btn-sm border-none shadow-none hover:text-primary"
+          >
+            Logout
+          </Link>
+          :
+          <Link
+            to="/login"
+            className="btn btn-sm btn-neutral border-none shadow-none hover:text-primary"
+          >
+            Login
+          </Link>
+          }
         </div>
       </div>
     </div>

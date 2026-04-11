@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
         <aside className="flex flex-col items-center justify-center w-full">
           <img src={logo} className="rounded-xl w-20" alt="" />
           <div>
-            <h1 className="text-2xl font-bold">
+            <Link to="/" className="text-2xl font-bold">
               <span className="text-[#FB4231]">T</span>
               <span className="text-[#dfce15]">o</span>
               <span className="text-[#5FC209]">y</span>
@@ -18,7 +19,7 @@ const Footer = () => {
               <span className="text-[#5FC209]">v</span>
               <span className="text-[#14a6ce]">e</span>
               <span className="text-[#AA43FA]">n</span>
-            </h1>
+            </Link>
           </div>
         </aside>
         <div className="w-full flex flex-col items-center justify-center text-center">
@@ -67,7 +68,7 @@ const Footer = () => {
         </nav>
         <hr className="w-full text-gray-500" />
         <small className="flex justify-center w-full">
-          <h1 className="text-xm text-center">
+          <Link to="/" className="text-xm text-center">
             <span className="text-[#FB4231]">T</span>
             <span className="text-[#dfce15]">o</span>
             <span className="text-[#5FC209]">y</span>
@@ -81,7 +82,7 @@ const Footer = () => {
               {" "}
               - 2026 &copy; All Rights Reserved.
             </span>
-          </h1>
+          </Link>
         </small>
       </footer>
     </div>
