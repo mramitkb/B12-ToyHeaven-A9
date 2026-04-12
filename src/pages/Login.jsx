@@ -151,7 +151,7 @@ const Login = () => {
   };
   return (
     <div className="bg-white mx-auto rounded-box md:w-2xl px-20 py-10 mt-20 min-h-[50vh]">
-      <form onSubmit={handleLogin} className="fieldset ">
+      <form onSubmit={handleLogin} className="fieldset">
         <h1 className="font-bold text-xl md:text-3xl text-center">
           Login Your Account
         </h1>

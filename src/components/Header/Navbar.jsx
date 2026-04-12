@@ -26,7 +26,17 @@ const Navbar = () => {
         navigate("/login");
       })
       .catch((error) => {
-        // console.log(error.code);
+        toast.error(error.code, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
       });
   };
   return (
@@ -85,7 +95,7 @@ const Navbar = () => {
           <div className="navbar-end gap-2">
             {user?.photoURL && (
               <img
-                className=" w-12 rounded-full"
+                className="w-12 h-12 rounded-full cursor-pointer"
                 src={user.photoURL}
                 alt=""
                 title={user?.displayName}
