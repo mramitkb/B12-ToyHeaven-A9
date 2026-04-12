@@ -18,7 +18,13 @@ const RootLayout = () => {
       <footer>
         <Footer></Footer>
       </footer>
-      <ToastContainer></ToastContainer>
+      <ToastContainer
+        position="top-right"
+        toastStyle={{
+          width: "300px",
+          maxWidth: "90vw",
+        }}
+      ></ToastContainer>
     </div>
   );
 };

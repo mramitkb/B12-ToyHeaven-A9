@@ -1,11 +1,34 @@
 import React, { useContext } from "react";
 import MyLink from "./MyLink";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
+import { ClockLoader } from "react-spinners";
+import { toast, Zoom } from "react-toastify";
 
 const Navbar = () => {
-  const { user, loading } = useContext(AuthContext);
-  console.log(user);
+  const { user, loading, signOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    signOutUser()
+      .then(() => {
+        toast(`সাইন-আউট সফল হয়েছে!`, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  };
   return (
     <div className="shadow-sm bg-[#d1ffe3]">
       <div className="navbar w-10/12 mx-auto px-0">
@@ -52,24 +75,40 @@ const Navbar = () => {
           <MyLink to={"/"}>Home</MyLink>
           <MyLink to={"/my-profile"}>My Profile</MyLink>
         </div>
-        <div className="navbar-end gap-2">
-          {user ? <img className=" w-10 h-10" src={user.photoURL} alt="" /> : <div className="skeleton w-10 h-10 shrink-0 rounded-full"></div>}
-          {
-            user ? <Link
-            to=""
-            className="btn btn-sm border-none shadow-none hover:text-primary"
-          >
-            Logout
-          </Link>
-          :
-          <Link
-            to="/login"
-            className="btn btn-sm btn-neutral border-none shadow-none hover:text-primary"
-          >
-            Login
-          </Link>
-          }
-        </div>
+        {/* Login/Logout */}
+        {loading ? (
+          <div className="navbar-end gap-2">
+            <ClockLoader size={36} color="#FB4231" />
+            <div className="skeleton btn bg-[#F8F8F8] btn-ghost w-16 h-8 shrink-0"></div>
+          </div>
+        ) : (
+          <div className="navbar-end gap-2">
+            {user?.photoURL && (
+              <img
+                className=" w-10 h-10"
+                src={user.photoURL}
+                alt=""
+                title={user?.displayName}
+              />
+            )}
+            {user ? (
+              <Link
+                to=""
+                onClick={handleLogout}
+                className="btn btn-sm border-none shadow-none hover:text-primary"
+              >
+                Logout
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-sm btn-neutral border-none shadow-none hover:text-primary"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

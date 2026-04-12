@@ -1,15 +1,17 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import React, { useContext, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, Zoom } from "react-toastify";
 
 const Login = () => {
-  const { setLoading, signInUser } = useContext(AuthContext);
+  const { signInUser, userPasswordReset } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const emailRef = useRef();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ const Login = () => {
         }
 
         toast(`স্বাগতম - ${user.displayName}!`, {
-        position: "top-right",
+          position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -48,16 +50,54 @@ const Login = () => {
           theme: "light",
           transition: Zoom,
         });
-        setLoading(false);
-        navigate("/");
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         if (error.code === "auth/invalid-credential") {
           setErrorMessage("আপনার ই-মেইল/পাসওয়ার্ড ভুল।");
           return;
         }
-    });
-      setErrorMessage("");
+      });
+    setErrorMessage("");
+  };
+
+  //   Forgot Password
+  const handleForgotPassword = () => {
+    const email = emailRef.current.value;
+    if (!email) {
+      return setErrorMessage(`আপনার ই-মেইলটি দিন।`);
+    }
+
+    setErrorMessage("");
+    // Send reset password email
+    userPasswordReset(email)
+      .then(() => {
+        toast(`পাসওয়ার্ড রিসেটের জন্য ই-মেইল পাঠানো হয়েছে!`, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+        emailRef.current.value = "";
+      })
+      .catch((error) => {
+        toast.error(error.code, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+      });
   };
   return (
     <div className="bg-white mx-auto rounded-box w-2xl px-20 py-10 mt-20 min-h-[50vh]">
@@ -67,9 +107,10 @@ const Login = () => {
         {/* Email */}
         <label className="label font-semibold text-base">Email</label>
         <input
+          ref={emailRef}
           type="email"
           name="email"
-          className="input w-full bg-base-200 border-none outline-none py-6 focus:shadow-none"
+          className="input w-full bg-base-200 border-green-600 outline-none py-6 focus:shadow-none"
           placeholder="Enter Your Email"
           required
         />
@@ -79,7 +120,7 @@ const Login = () => {
           <input
             type={showPassword ? "text" : "password"}
             name="password"
-            className="input w-full bg-base-200 border-none outline-none py-6 focus:shadow-none"
+            className="input w-full bg-base-200 border-green-600 outline-none py-6 focus:shadow-none"
             placeholder="Enter Your Password"
             required
           />
@@ -92,7 +133,11 @@ const Login = () => {
         </div>
         {/* Forgot Password */}
         <div className="mt-2">
-          <Link to="" className="link link-hover text-sm">
+          <Link
+            onClick={handleForgotPassword}
+            to=""
+            className="link link-hover text-sm"
+          >
             Forgot password?
           </Link>
         </div>
@@ -112,8 +157,9 @@ const Login = () => {
           Login
         </button>
       </form>
+      <p className="text-center mt-3">or</p>
       {/* Login with Social */}
-      <div className="mt-6 flex flex-col items-center gap-3">
+      <div className="mt-3 flex flex-col md:flex-row items-center justify-center gap-3">
         {/* Google */}
         <button className="btn w-fit bg-white text-black border-[#e5e5e5]">
           <svg

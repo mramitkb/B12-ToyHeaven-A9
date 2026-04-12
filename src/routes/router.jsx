@@ -5,12 +5,16 @@ import MyProfile from "../pages/MyProfile";
 import ToyDetails from "../pages/ToyDetails";
 import Registration from "../pages/Registration";
 import Login from "../pages/Login";
+import LoadingSpinner from "../pages/LoadingSpinner";
+import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout></RootLayout>,
-        hydrateFallbackElement: <p>Loading...</p>,
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
@@ -18,7 +22,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/my-profile",
-                element: <MyProfile></MyProfile>
+                element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
             },
             {
                 path: "/registration",
@@ -31,7 +35,7 @@ export const router = createBrowserRouter([
             {
                 path: "/toy/:id",
                 loader: async() => await fetch("/toysData.json"),
-                element: <ToyDetails></ToyDetails>
+                element: <PrivateRoute><ToyDetails></ToyDetails></PrivateRoute>
             }
         ]
     }

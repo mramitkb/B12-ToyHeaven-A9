@@ -17,7 +17,6 @@ const ToyDetails = () => {
     sellerEmail,
     description,
   } = toy;
-  console.log(toy);
 
   const handleTryNowForm = (e) => {
     e.preventDefault();
