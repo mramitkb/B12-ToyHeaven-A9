@@ -66,8 +66,8 @@ const ToyDetails = () => {
           </div>
           <hr className="text-[#a9d8bb]" />
           {/* Try Now */}
-          <div className="flex items-center flex-col space-y-5">
-            <h1 className="text-2xl font-bold text-primary">Try Now </h1>
+          <div className="flex items-center flex-col mt-10">
+            <h1 className="text-2xl font-bold text-primary mb-3">Try Now </h1>
             <form onSubmit={handleTryNowForm} className="fieldset w-full">
               {/* Name */}
               <label className="label">Name</label>

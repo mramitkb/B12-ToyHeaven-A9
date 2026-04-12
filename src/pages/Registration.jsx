@@ -5,13 +5,20 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, Zoom } from "react-toastify";
 
 const Registration = () => {
-  const { createUser, updateUserProfile, emailVerification, signOutUser } =
-    useContext(AuthContext);
+  const {
+    createUser,
+    updateUserProfile,
+    emailVerification,
+    signOutUser,
+    signInWithGoogle,
+    signInWithGithub,
+  } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [terms, setTerms] = useState(false);
   const navigate = useNavigate();
 
+  //   User Registration
   const handleRegistration = (e) => {
     e.preventDefault();
 
@@ -103,50 +110,98 @@ const Registration = () => {
         }
       });
   };
+
+  //   Google Sign In
+  const handleGoogleSignIn = () => {
+    setErrorMessage("");
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        toast(`স্বাগতম - ${user.displayName}!`, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        setErrorMessage(error.code);
+      });
+  };
+
+  // Github Sign In
+  const handleGithubSignIn = () => {
+    setErrorMessage("");
+    signInWithGithub()
+      .then((result) => {
+        const user = result.user;
+        toast(`স্বাগতম - ${user.displayName}!`, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        setErrorMessage(error.code);
+      });
+  };
   return (
     <div>
       <form
         onSubmit={handleRegistration}
-        className="fieldset bg-white mx-auto rounded-box w-2xl px-20 pt-20 min-h-[50vh]"
+        className="fieldset bg-white mx-auto rounded-box md:w-2xl px-20 pt-20 min-h-[50vh]"
       >
-        <h1 className="font-bold text-3xl text-center">
+        <h1 className="font-bold text-xl md:text-3xl text-center">
           Register Your Account
         </h1>
         <hr className="text-info my-5" />
         {/* Name */}
-        <label className="label font-semibold text-base">Name</label>
+        <label className="label font-semibold text-sm">Name</label>
         <input
           type="name"
           name="name"
-          className="input w-full bg-base-200 border-info outline-none py-6 focus:shadow-none"
+          className="input w-full bg-base-200 border-info outline-none md:py-6 focus:shadow-none"
           placeholder="Enter Your Name"
           required
         />
         {/* Email */}
-        <label className="label font-semibold text-base mt-3">Email</label>
+        <label className="label font-semibold text-sm mt-3">Email</label>
         <input
           type="email"
           name="email"
-          className="input w-full bg-base-200 border-info outline-none py-6 focus:shadow-none"
+          className="input w-full bg-base-200 border-info outline-none md:py-6 focus:shadow-none"
           placeholder="Enter Your Email"
           required
         />
         {/* Photo URL */}
-        <label className="label font-semibold text-base mt-3">Photo URL</label>
+        <label className="label font-semibold text-sm mt-3">Photo URL</label>
         <input
           type="url"
           name="photo"
-          className="input w-full bg-base-200 border-info outline-none py-6 focus:shadow-none"
+          className="input w-full bg-base-200 border-info outline-none md:py-6 focus:shadow-none"
           placeholder="Enter Your Photo URL"
           required
         />
         {/* Password */}
-        <label className="label font-semibold text-base mt-3">Password</label>
+        <label className="label font-semibold text-sm mt-3">Password</label>
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
             name="password"
-            className="input w-full bg-base-200 border-info outline-none py-6 focus:shadow-none"
+            className="input w-full bg-base-200 border-info outline-none md:py-6 focus:shadow-none"
             placeholder="Enter Your Password"
             required
           />
@@ -167,11 +222,17 @@ const Registration = () => {
           />
           Accept Our Terms & Conditions.
         </label>
+        {/* Message */}
+        <div className="my-3">
+          {errorMessage && (
+            <p className="text-red-500 text-center">{errorMessage}</p>
+          )}
+        </div>
         {/* Button */}
         <button
           disabled={!terms}
           type="submit"
-          className="btn btn-neutral hover:shadow-none hover:bg-info hover:border-none hover:text-black mt-4"
+          className="btn btn-sm md:btn-md btn-neutral hover:shadow-none hover:bg-info hover:border-none hover:text-black"
         >
           Registration
         </button>
@@ -184,18 +245,15 @@ const Registration = () => {
             Login
           </Link>
         </p>
-        {/* Message */}
-        <div>
-          {errorMessage && (
-            <p className="text-red-500 text-center">{errorMessage}</p>
-          )}
-        </div>
       </form>
       <p className="text-center">or</p>
       {/* Login with Social */}
-      <div className="flex flex-col md:flex-row justify-center items-center gap-3 mb-20 mt-3">
+      <div className="flex flex-row justify-center items-center gap-3 mb-20 mt-3">
         {/* Google */}
-        <button className="btn w-fit bg-white text-black border-[#e5e5e5]">
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn btn-sm md:btn-md w-fit bg-white text-black border-[#e5e5e5]"
+        >
           <svg
             aria-label="Google logo"
             width="16"
@@ -226,7 +284,10 @@ const Registration = () => {
           Login with Google
         </button>
         {/* GitHub */}
-        <button className="btn w-fit bg-black text-white border-black">
+        <button
+          onClick={handleGithubSignIn}
+          className="btn btn-sm md:btn-md w-fit bg-black text-white border-black"
+        >
           <svg
             aria-label="GitHub logo"
             width="16"

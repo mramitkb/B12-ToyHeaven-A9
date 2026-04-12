@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
+
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -47,6 +53,18 @@ const AuthProvider = ({ children }) => {
     );
   };
 
+//   Google Login
+const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider).finally(() => setLoading(false));
+}
+
+//   Github Login
+const signInWithGithub = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider).finally(() => setLoading(false));
+}
+
   //   Password Reset
   const userPasswordReset = (email) => {
     setLoading(true);
@@ -81,7 +99,9 @@ const AuthProvider = ({ children }) => {
     emailVerification,
     signOutUser,
     signInUser,
-    userPasswordReset
+    userPasswordReset,
+    signInWithGoogle,
+    signInWithGithub
   };
 
   return <AuthContext value={authInfo}>{children}</AuthContext>;

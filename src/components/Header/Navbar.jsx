@@ -85,7 +85,7 @@ const Navbar = () => {
           <div className="navbar-end gap-2">
             {user?.photoURL && (
               <img
-                className=" w-10 h-10"
+                className=" w-12 rounded-full"
                 src={user.photoURL}
                 alt=""
                 title={user?.displayName}
@@ -95,7 +95,7 @@ const Navbar = () => {
               <Link
                 to=""
                 onClick={handleLogout}
-                className="btn btn-sm border-none shadow-none hover:text-primary"
+                className="btn btn-sm border-none shadow-none hover:text-primary hover:bg-black"
               >
                 Logout
               </Link>
